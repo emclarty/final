@@ -1,4 +1,4 @@
-def path : System.FilePath := System.mkFilePath ["input2"]
+def path : System.FilePath := System.mkFilePath ["input/day2.txt"]
 /-#eval IO.FS.readFile path-/
 namespace Day2
 
