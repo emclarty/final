@@ -1,4 +1,4 @@
-# final
+# 411 Project Overview
 
 Shash, Daniel, and I looked at Day 1, 2, and 3 of Advent of Code 2022. 
 As Lean was new to all of us, this was a challenging and productive way to learn more about the implementation of the language.
