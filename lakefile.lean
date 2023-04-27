@@ -1,6 +1,7 @@
 import Lake
 open Lake DSL
 
+2-finish-day-3
 package final
 
 require mathlib from git
@@ -9,6 +10,3 @@ require mathlib from git
 @[default_target]
 lean_lib final where
   moreLeanArgs := #["-DwarningAsError=true", "-Dpp.unicode.fun=true"] -- pretty-prints `fun a ↦ b`
-
-meta if get_config? doc = some "on" then -- do not download and build doc-gen4 by default
-require «doc-gen4» from git "https://github.com/leanprover/doc-gen4.git" @ "main"
