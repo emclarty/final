@@ -1,18 +1,11 @@
 import Lake
 open Lake DSL
 
-package «final» {
-  -- add package configuration options here
-}
-
-lean_lib «Final» {
-  -- add library configuration options here
-}
-
 @[default_target]
-lean_exe «final» {
-  root := `Main
-}
+lean_lib final where
+  moreLeanArgs := #["-DwarningAsError=true", "-Dpp.unicode.fun=true"] -- pretty-prints `fun a ↦ b`
+
+
 
 require mathlib from git
   "https://github.com/leanprover-community/mathlib4.git"@"master"
