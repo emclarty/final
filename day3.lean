@@ -7,7 +7,7 @@ def lineBreak : String :=
 
 namespace day3
 
-def day3_inputpath := System.FilePath.mk "/home/shash/School/2022—2023/SCHC411/AdventOfCode/input/day3.txt"
+def day3_inputpath := System.FilePath.mk "input/day3.txt"
 
 -- Function Definitions -------------------------------------
 def break_input (s : String) : List Char × List Char :=
@@ -70,9 +70,29 @@ def match_char (s : String) : Nat :=
   | "Z" => 52
   | _ => 0
 
+def breakLines (s : String) : List String :=
+  s.splitOn "\n"
+
+def groupByThrees {α : Type} (l : List α) : List (List α) :=
+  match l with
+  | [] => []
+  | s::ss =>
+      match groupByThrees ss with
+      | [] => [[s]]
+      | l::ls => if l.length = 3 then [s]::(l::ls) else (s::l)::ls
+
+def inter (l : List String) : String :=
+  match l with
+  | [] => ""
+  | [s] => s
+  | s::ss => ⟨s.data.bagInter (inter ss).data⟩
+
+def commonLetters (s : String) : List String :=
+  groupByThrees (breakLines s)|>.map inter
+
 -- Answer Function ------------------------------------------
 -- Day 3 | Question 1
-def day3_question1 : IO Nat := do
+def part1 : IO Nat := do
   let input ← IO.FS.readFile day3_inputpath
 
   -- break the input file into a list of strings by line
@@ -88,11 +108,19 @@ def day3_question1 : IO Nat := do
     -- if string does not exist in second, continue recursively
   -- put all responses in list
   let shared := halves.map fun (l₁, l₂) => l₁.bagInter l₂
-
+  
   -- map each shared character to its appropriate priority value
   let priorities := shared.map fun s => match_char ⟨s⟩
 
   -- take in list, map all entries to a number depending on weight, return sum of list
   return priorities.foldl (·+·) 0
 
-#eval day3_question1
+-- Day 3 | Question 2
+def part2 : IO Nat := do
+  let input ← IO.FS.readFile day3_inputpath
+  let shared := commonLetters input
+  let priorities := shared.map match_char
+  return priorities.foldl (·+·) 0
+
+#eval part1
+#eval part2
