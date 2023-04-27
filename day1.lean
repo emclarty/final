@@ -1,3 +1,4 @@
+def path : System.FilePath := System.mkFilePath ["input/day1.txt"]
 
 def elves (s : String): List String := 
     s.splitOn "\n\n"
@@ -17,7 +18,6 @@ def totalCallist (s : String) : List Nat :=
 def answer (s: String) : Nat := 
     totalCallist s|>.foldl max 0
 
-
 def contents : IO Unit := do
     let file ← IO.FS.readFile path
     IO.println file
@@ -25,7 +25,6 @@ def contents : IO Unit := do
     IO.println newFile
     return ()
 
-2-finish-day-3
 def part1 : IO Unit := do
     let file ← IO.FS.readFile path
     -- IO.println file.data.getLast!

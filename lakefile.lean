@@ -1,7 +1,6 @@
 import Lake
 open Lake DSL
 
-2-finish-day-3
 package final
 
 require mathlib from git
