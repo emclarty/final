@@ -1,5 +1,3 @@
-namespace Day1
-
 --def path : System.FilePath := System.mkFilePath ["/Users/ellismclarty/Documents/2022-23/Spring 2023/SCHC411/final/elf_input.txt"]
 --#eval IO.FS.readFile path
 
@@ -71,19 +69,17 @@ def part1 : IO Unit := do
     let file ← IO.FS.readFile path
     -- IO.println file.data.getLast!
     IO.println (answer file)
-    IO.println (totalCallist file)
     return ()
 
-def part2: IO Nat := do
+def part2: IO Unit := do
     let file ← IO.FS.readFile path
     let nat_list := totalCallist file
     let arr := List.toArray nat_list
-    let sorted_arr := Array.qsort arr fun n m => m <= n
+    let sorted_arr := Array.qsort arr fun m n => n <= m
     let sorted_list := Array.toList sorted_arr
     let top_3 := sorted_list.take 3
-    return top_3.foldl (·+·) 0
+    IO.println (top_3.foldl (·+·) 0)
+    return ()
 
 #eval part1
 #eval part2
-
-end Day1
