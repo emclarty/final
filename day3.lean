@@ -15,7 +15,7 @@ def break_input (s : String) : List Char × List Char :=
   (string_list.take (string_list.length/2), string_list.drop (string_list.length/2))
 
 def first (s : String) : Char :=
-  s.data.get! 1
+  s.data.get! 0
 
 def match_char (s : String) : Nat :=
   let f := first s
@@ -123,7 +123,6 @@ def part1 : IO Nat := do
 def part2 : IO Nat := do
   let input ← IO.FS.readFile day3_inputpath
   let shared := commonLetters input
-  IO.println (shared)
   let priorities := shared.map match_char
   return priorities.foldl (·+·) 0
 
