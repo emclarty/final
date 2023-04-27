@@ -27,19 +27,19 @@ def test: String :=
 def elves (s : String): List String := 
     s.splitOn "\n\n"
 
-#eval elves test
+-- #eval elves test
 
 def calories (s: String) : List Nat :=
     let l' := s.splitOn "\n"
     l'.map (fun s => s.toNat!)
 
-#eval (elves test).map calories
+-- #eval (elves test).map calories
 
 def addUp (l : List Nat) : Nat := 
     l.foldl (. + .) 0 
 
-#eval addUp [1, 2, 3, 4, 5]
-#eval (elves test).map calories
+-- #eval addUp [1, 2, 3, 4, 5]
+-- #eval (elves test).map calories
 
 def totalCallist (s : String) : List Nat :=
     let t := elves s
@@ -57,7 +57,7 @@ def answer (s: String) : Nat :=
 
 #print System.FilePath 
 
-def path := System.FilePath.mk "/Users/ellismclarty/Documents/2022-23/Spring_2023/SCHC411/elf_input.txt"
+def path := System.FilePath.mk "input/day1.txt"
 
 def contents : IO Unit := do
     let file ← IO.FS.readFile path
@@ -66,6 +66,24 @@ def contents : IO Unit := do
     IO.println newFile
     return ()
 
-#print Option
+
+def part1 : IO Unit := do
+    let file ← IO.FS.readFile path
+    -- IO.println file.data.getLast!
+    IO.println (answer file)
+    IO.println (totalCallist file)
+    return ()
+
+def part2: IO Nat := do
+    let file ← IO.FS.readFile path
+    let nat_list := totalCallist file
+    let arr := List.toArray nat_list
+    let sorted_arr := Array.qsort arr fun n m => m <= n
+    let sorted_list := Array.toList sorted_arr
+    let top_3 := sorted_list.take 3
+    return top_3.foldl (·+·) 0
+
+#eval part1
+#eval part2
 
 end Day1

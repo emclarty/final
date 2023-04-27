@@ -1,7 +1,7 @@
 import Std.Data.List.Basic
 import Mathlib.Data.String.Basic
 
--- Day 1 -----------------------------------------------------------------------------------------------z
+-- Day 1 -----------------------------------------------------------------------------------------------
 namespace Day1
 
 def test: String :=
@@ -143,7 +143,7 @@ def playxPlay (s : String) : (Play × Play) :=
 
 #eval (((round testGame).map playxPlay).map fun x => score x.1 x.2).foldl (·+·) 0
 
-def path := System.FilePath.mk "/Users/danieljtedeschi/Desktop/input2.txt"
+def path := System.FilePath.mk "input/day2.txt"
 
 #check IO.FS.readFile path
 

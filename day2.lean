@@ -71,7 +71,7 @@ def playxPlay (s : String) : (Play × Play) :=
 
 #eval (((round testGame).map playxPlay).map fun x => score x.1 x.2).foldl (·+·) 0
 
-def path := System.FilePath.mk "/Users/danieljtedeschi/Desktop/input2.txt"
+def path := System.FilePath.mk "input/day2.txt"
 
 #check IO.FS.readFile path
 
